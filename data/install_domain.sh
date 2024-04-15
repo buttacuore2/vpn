@@ -8,7 +8,7 @@ echo "Setup Domain."
 mkdir /etc/domain
 touch /etc/domain/d-domain
 touch /etc/domain/f-domain
-wget https://raw.githubusercontent.com/FasterExE/OVPN-Script/main/data/cf.sh
+wget https://raw.githubusercontent.com/quoctrungdhqn/vpn/main/data/cf.sh
 bash cf.sh
 rm cf.sh
 clear
