@@ -6,7 +6,7 @@ PORT_UDP='2200'
 clear
 apt install apache2 -y
 rm /etc/apache2/ports.conf
-wget -O /etc/apache2/ports.conf https://raw.githubusercontent.com/FasterExE/OVPN-Script/main/data/apache2.port
+wget -O /etc/apache2/ports.conf https://raw.githubusercontent.com/quoctrungdhqn/vpn/main/data/apache2.port
 sudo systemctl restart apache2
 clear
 rm /var/www/html/udp.ovpn
@@ -74,6 +74,6 @@ eDKMefDi0ZfiZmnU2njmTncyZKxv18Ikjws0Myc8PtAxy2qdcA==
 
 clear
 rm /var/www/html/index.html
-wget -O /var/www/html/index.html https://raw.githubusercontent.com/FasterExE/OVPN-Script/main/data/index.html
+wget -O /var/www/html/index.html https://raw.githubusercontent.com/quoctrungdhqn/vpn/main/data/index.html
 sudo systemctl restart apache2
 clear
