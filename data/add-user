@@ -28,7 +28,7 @@ echo "#ssh# ${LOGIN} " >>/etc/ssh/.ssh.db
 clear
 clear
 echo -e "\033[1;96m──────────────────────────────────\033[0m"
-echo -e "\033[1;97m         Format OVPN Account\033[0m"
+echo -e "\033[1;97m                     Account\033[0m"
 echo -e "\033[1;96m──────────────────────────────────\033[0m"
 echo -e "\033[1;93mUsername         : $LOGIN\033[0m"
 echo -e "\033[1;93mPassword         : $PASSWD\033[0m"
@@ -44,7 +44,7 @@ echo -e "\033[1;97mPort OVPN SSL    : 443\033[0m"
 echo -e "\033[1;96m──────────────────────────────────\033[0m"
 echo -e "\033[1;97m Install OpenVPN Profile : http://$(curl -sS ifconfig.me):89\033[0m"
 echo -e "\033[1;96m──────────────────────────────────\033[0m"
-echo -e "\033[1;97m         SCRIPT BY ILYASS\033[0m"
+echo -e "\033[1;97m               BY MED\033[0m"
 echo -e "\033[1;96m──────────────────────────────────\033[0m"
 read -n 1 -s -r -p "Press [ Enter ] to back on menu"
 menu
