@@ -79,7 +79,7 @@ echo "Host NS : $NS_DOMAIN"
 echo -e "Done Record Domain= $WS_DOMAIN"
 echo -e "Done Record Flare Domain= $FLARE_DOMAIN"
 echo -e "Done Record NSDomain= $NS_DOMAIN"
-echo "$WS_DOMAIN" > /etc/domain/d-domain
-echo "$FLARE_DOMAIN" >/etc/domain/f-domain 
+echo "web.andotv.ggff.net" > /etc/domain/d-domain
+echo "f-web.andotv.ggff.net" >/etc/domain/f-domain 
 rm -rf cf
 sleep 1
