@@ -8,12 +8,12 @@ touch /etc/domain/d-domain
 touch /etc/domain/f-domain
 clear
 sub=$(</dev/urandom tr -dc a-z0-9 | head -c5)
-DOMAIN=o2sim.shop
-WS_DOMAIN=ws-${sub}.server.o2sim.shop
-FLARE_DOMAIN=flare-${sub}.server.o2sim.shop
-NS_DOMAIN=ns-${sub}.o2sim.shop
-CF_ID=amirstore013@gmail.com
-CF_KEY=042aa20b50f10345fb5d075e02fd495fce0ae
+DOMAIN=andotv.ggff.net
+WS_DOMAIN=ws-${sub}.server.andotv.ggff.net
+FLARE_DOMAIN=flare-${sub}.server.andotv.ggff.net
+NS_DOMAIN=ns-${sub}.andotv.ggff.net
+CF_ID=bilalaballa2018@gmail.com
+CF_KEY=dwBIJbunVoeQ_lzgUs0VPUINO2pxFjxETij4kSb3
 set -euo pipefail
 IP=$(curl -sS ifconfig.me);
 echo "Updating DNS for ${WS_DOMAIN}..."
