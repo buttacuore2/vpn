@@ -8,7 +8,7 @@ flare=`cat /etc/domain/f-domain`
 
 clear
 echo -e "\033[1;96m──────────────────────────────────\033[0m"
-echo -e "\033[1;97m         SCRIPT BY MED\033[0m"
+echo -e "\033[1;97m         SCRIPT BY BUTTACUORE\033[0m"
 echo -e "\033[1;96m──────────────────────────────────\033[0m"
 echo -e "\033[1;97mIP               : $IP\033[0m"
 echo -e "\033[1;97mHost             : $domain\033[0m"
