@@ -1,85 +1,41 @@
 #!/bin/bash
-#random
-apt install jq curl -y
-rm -rf /etc/domain/d-domain
-rm -rf /etc/domain/f-domain
-mkdir -p /etc/domain
-touch /etc/domain/d-domain
-touch /etc/domain/f-domain
-clear
-sub=$(</dev/urandom tr -dc a-z0-9 | head -c5)
-DOMAIN=andotv.ggff.net
-WS_DOMAIN=ws-${sub}.server.andotv.ggff.net
-FLARE_DOMAIN=flare-${sub}.server.andotv.ggff.net
-NS_DOMAIN=ns-${sub}.andotv.ggff.net
-CF_ID=bilalaballa2018@gmail.com
-CF_KEY=dwBIJbunVoeQ_lzgUs0VPUINO2pxFjxETij4kSb3
+apt update
+apt install -y jq curl 
+ZONE_ID="a3e6bf07fda3ed8e56dde17376255188"
+API_TOKEN="dwBIJbunVoeQ_lzgUs0VPUINO2pxFjxETij4kSb3"
+RECORD_NAME="NF-$(head /dev/urandom | tr -dc a-z0-9 | head -c 5).andotv.ggff.net"
+echo "Record DNS $RECORD_NAME..."
+RECORD_TYPE="A"
+#RECORD_CONTENT= $(curl -s ipinfo.io/ip)
+RECORD_TTL=300
+PROXIED="false"
+API_URL="https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records"
+DATA='{"type":"'"$RECORD_TYPE"'", "name":"'"$RECORD_NAME"'", "content":"'"$(curl -s ipinfo.io/ip)"'", "ttl":'$RECORD_TTL', "proxied": '"$PROXIED"'}'
+
+RECORD=$(curl -sX GET "${API_URL}?name=${RECORD_NAME}" \
+     -H "Authorization: Bearer ${API_TOKEN}" \
+     -H "Content-Type: application/json" | jq -r .result[0].id)
+if [ "${#RECORD}" -le 10 ]; then
+	curl -X POST "$API_URL" \
+		 -H "Authorization: Bearer $API_TOKEN" \
+		 -H "Content-Type: application/json" \
+		 --data "$DATA"
+fi
+
+echo "---------------------------------------------------------------------------------------"
 set -euo pipefail
-IP=$(curl -sS ifconfig.me);
-echo "Updating DNS for ${WS_DOMAIN}..."
-ZONE=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones?name=${DOMAIN}&status=active" \
--H "X-Auth-Email: ${CF_ID}" \
--H "X-Auth-Key: ${CF_KEY}" \
--H "Content-Type: application/json" | jq -r .result[0].id)
-RECORD=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records?name=${WS_DOMAIN}" \
--H "X-Auth-Email: ${CF_ID}" \
--H "X-Auth-Key: ${CF_KEY}" \
--H "Content-Type: application/json" | jq -r .result[0].id)
-if [[ "${#RECORD}" -le 10 ]]; then
-#start-ws
-RECORD=$(curl -sLX POST "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records" \
--H "X-Auth-Email: ${CF_ID}" \
--H "X-Auth-Key: ${CF_KEY}" \
--H "Content-Type: application/json" \
---data '{"type":"A","name":"'${WS_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}' | jq -r .result.id)
-fi
-#end-ws
-echo "Updating DNS FLARE for ${FLARE_DOMAIN}..."
-#start-flare
-RECORD=$(curl -sLX POST "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records" \
--H "X-Auth-Email: ${CF_ID}" \
--H "X-Auth-Key: ${CF_KEY}" \
--H "Content-Type: application/json" \
---data '{"type":"CNAME","name":"'${FLARE_DOMAIN}'","content":"'${WS_DOMAIN}'","ttl":120,"proxied":true}' | jq -r .result.id)
-#end-flare
+echo " REponce:  $RECORD"
+echo "Record DNS $RECORD_NAME..."
+# Output confirmation
+echo "Host: $RECORD_NAME"
+echo "Done Record Domain: $RECORD_NAME for VPS"
 
-RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records/${RECORD}" \
--H "X-Auth-Email: ${CF_ID}" \
--H "X-Auth-Key: ${CF_KEY}" \
--H "Content-Type: application/json" \
---data '{"type":"A","name":"'${WS_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}')
-echo "Updating DNS NS for ${NS_DOMAIN}..."
-ZONE=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones?name=${DOMAIN}&status=active" \
--H "X-Auth-Email: ${CF_ID}" \
--H "X-Auth-Key: ${CF_KEY}" \
--H "Content-Type: application/json" | jq -r .result[0].id)
-RECORD=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records?name=${NS_DOMAIN}" \
--H "X-Auth-Email: ${CF_ID}" \
--H "X-Auth-Key: ${CF_KEY}" \
--H "Content-Type: application/json" | jq -r .result[0].id)
-if [[ "${#RECORD}" -le 10 ]]; then
-
-#start-ns
-RECORD=$(curl -sLX POST "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records" \
--H "X-Auth-Email: ${CF_ID}" \
--H "X-Auth-Key: ${CF_KEY}" \
--H "Content-Type: application/json" \
---data '{"type":"NS","name":"'${NS_DOMAIN}'","content":"'${WS_DOMAIN}'","ttl":120,"proxied":false}' | jq -r .result.id)
-fi
-#end-ns
-
-RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records/${RECORD}" \
--H "X-Auth-Email: ${CF_ID}" \
--H "X-Auth-Key: ${CF_KEY}" \
--H "Content-Type: application/json" \
---data '{"type":"NS","name":"'${NS_DOMAIN}'","content":"'${WS_DOMAIN}'","ttl":120,"proxied":false}')
-echo "Host WS : $WS_DOMAIN"
-echo "Host FLARE: $FLARE_DOMAIN"
-echo "Host NS : $NS_DOMAIN"
-echo -e "Done Record Domain= $WS_DOMAIN"
-echo -e "Done Record Flare Domain= $FLARE_DOMAIN"
-echo -e "Done Record NSDomain= $NS_DOMAIN"
-echo "web.andotv.ggff.net" > /etc/domain/d-domain
-echo "f-web.andotv.ggff.net" >/etc/domain/f-domain 
+# Update configuration files (ensure directories exist)
+# Update configuration files (ensure directories exist)
+echo "Script execution completed."
+echo "Host : $RECORD_NAME"
+echo -e "Done Record Domain= ${RECORD_NAME} For VPS"
+echo "$RECORD_NAME" > /etc/domain/d-domain
+echo "$RECORD_NAME" >/etc/domain/f-domain 
 rm -rf cf
 sleep 1
