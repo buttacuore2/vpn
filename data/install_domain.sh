@@ -9,6 +9,7 @@ mkdir /etc/domain
 touch /etc/domain/d-domain
 touch /etc/domain/f-domain
 wget https://raw.githubusercontent.com/quoctrungdhqn/vpn/main/data/cf.sh
+dos2unix cf.sh
 bash cf.sh
 rm cf.sh
 clear
