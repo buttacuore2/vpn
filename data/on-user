@@ -17,7 +17,7 @@ if [ -z "$output" ]; then
     echo -e "\033[1;96m──────────────────────────────────\033[0m"
     echo -e "\033[1;91mNo users connected.\033[0m"
 echo -e "\033[1;96m──────────────────────────────────\033[0m"
-echo -e "\033[1;97m                BY MED\033[0m"
+echo -e "\033[1;97m                BY BUTTACUORE\033[0m"
 echo -e "\033[1;96m──────────────────────────────────\033[0m"
 read -n 1 -s -r -p "Press [ Enter ] to back on menu"
 menu
@@ -36,7 +36,7 @@ while read -r line; do
     printf "\033[1;93m[%-3s] \033[0m\033[1;32m%-20s\033[0m\n" "$count" "$user"
 done <<< "$output"
 echo -e "\033[1;96m──────────────────────────────────\033[0m"
-echo -e "\033[1;97m          BY MED\033[0m"
+echo -e "\033[1;97m          BY BUTTACUORE\033[0m"
 echo -e "\033[1;96m──────────────────────────────────\033[0m"
 read -n 1 -s -r -p "Press [ Enter ] to back on menu"
 menu
