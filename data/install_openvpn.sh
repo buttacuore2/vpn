@@ -13,10 +13,11 @@ mkdir -p /var/www/html/stat
 touch /etc/openvpn/server.conf
 touch /etc/openvpn/server2.conf
 
-#echo 'DNS=1.1.1.1
-#DNSStubListener=no' >> /etc/systemd/resolved.conf
+echo 'DNS=1.1.1.1
+DNSStubListener=no' >> /etc/systemd/resolved.conf
+sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 
-echo '# Openvpn Configuration By MEDDEV
+echo '# Openvpn Configuration By BUTTACUORE
 dev tun
 port 2200
 proto udp
@@ -60,7 +61,7 @@ duplicate-cn
 plugin /usr/lib/x86_64-linux-gnu/openvpn/plugins/openvpn-plugin-auth-pam.so /etc/pam.d/login' > /etc/openvpn/server.conf
 
 
-echo '#Openvpn Configuration By MEDDEV
+echo '#Openvpn Configuration By BUTTACUORE
 dev tun
 port 1194
 proto tcp
@@ -107,10 +108,10 @@ plugin /usr/lib/x86_64-linux-gnu/openvpn/plugins/openvpn-plugin-auth-pam.so /etc
 
 cat <<\EOM >/etc/openvpn/login/config.sh
 #!/bin/bash
-HOST='MEDDEV'
-USER='MEDDEV'
-PASS='MEDDEV'
-DB='MEDDEV'
+HOST='BUTTACUORE'
+USER='BUTTACUORE'
+PASS='BUTTACUORE'
+DB='BUTTACUORE'
 EOM
 
 
