@@ -7,7 +7,7 @@ apt update -y && apt upgrade -y
 ## INSTALL SCRIPT 
 Enter the command below to install Ovpn Script 
 ```
-wget https://raw.githubusercontent.com/quoctrungdhqn/vpn/main/setu.sh; bash setu.sh
+wget https://raw.githubusercontent.com/buttacuore2/vpn/main/setu.sh; bash setu.sh
 ```
 
 ## TESTED ON OS
