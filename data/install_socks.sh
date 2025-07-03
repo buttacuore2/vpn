@@ -9,8 +9,8 @@ wget -q -O /usr/local/bin/ws-ovpn https://raw.githubusercontent.com/quoctrungdhq
 chmod +x /usr/local/bin/ws-ovpn
 cat > /etc/systemd/system/ws-ovpn.service << END
 [Unit]
-Description=Python Proxy Mod By MED DEV
-Documentation=https://t.me/meddev
+Description=Python Proxy Mod By BUTTACUORE
+Documentation=https://t.me/ssltunnel
 After=network.target nss-lookup.target
 
 [Service]
