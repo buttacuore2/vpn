@@ -5,7 +5,7 @@ PORT_UDP='2200'
 
 clear
 echo "Installing WebSocket."
-wget -q -O /usr/local/bin/ws-ovpn https://raw.githubusercontent.com/quoctrungdhqn/vpn/main/data/ws-ovpn.py
+wget -q -O /usr/local/bin/ws-ovpn https://raw.githubusercontent.com/buttacuore2/vpn/main/data/ws-ovpn.py
 chmod +x /usr/local/bin/ws-ovpn
 cat > /etc/systemd/system/ws-ovpn.service << END
 [Unit]
