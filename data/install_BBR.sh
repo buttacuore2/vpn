@@ -11,11 +11,10 @@ grub-set-default 0
 echo "tcp_bbr" >> /etc/modules-load.d/modules.conf
 INSTALL_BBR=true
 sudo sysctl -p
-nato = $(route | grep '^default' | grep -o '[^ ]*$')
-sudo iptables -t nat -A POSTROUTING -o $nato -s 10.20.0.0/16 -j MASQUERADE
-sudo iptables -t nat -A POSTROUTING -o $nato -s 10.30.0.0/16 -j MASQUERADE
+sudo iptables -t nat -A POSTROUTING -o $(ip -4 route ls|grep default|grep -Po '(?<=dev )(\S+)'|head -1) -s 10.20.0.0/16 -j MASQUERADE
+sudo iptables -t nat -A POSTROUTING -o $(ip -4 route ls|grep default|grep -Po '(?<=dev )(\S+)'|head -1) -s 10.30.0.0/16 -j MASQUERADE
 echo iptables-persistent iptables-persistent/autosave_v4 boolean true | sudo debconf-set-selections
 echo iptables-persistent iptables-persistent/autosave_v6 boolean true | sudo debconf-set-selections
 sudo apt-get install iptables-persistent -y
-sudo iptables -t nat -A POSTROUTING -o $nato -s 10.20.0.0/16 -j MASQUERADE
-sudo iptables -t nat -A POSTROUTING -o $nato -s 10.30.0.0/16 -j MASQUERADE
+sudo iptables -t nat -A POSTROUTING -o $(ip -4 route ls|grep default|grep -Po '(?<=dev )(\S+)'|head -1) -s 10.20.0.0/16 -j MASQUERADE
+sudo iptables -t nat -A POSTROUTING -o $(ip -4 route ls|grep default|grep -Po '(?<=dev )(\S+)'|head -1) -s 10.30.0.0/16 -j MASQUERADE
