@@ -14,7 +14,7 @@ echo "2. Choose Your Own Domain"
 read -rp "Input 1 or 2: " dns
 if [ "$dns" -eq 1 ]; then
     # Download cf script and convert line endings
-    wget https://raw.githubusercontent.com/buttacuore2/NETWORKFREE/refs/heads/main/ssh/cf.sh
+    wget https://raw.githubusercontent.com/buttacuore2/vpn/refs/heads/main/data/cf.sh
     dos2unix cf.sh
     bash cf.sh
 elif [ "$dns" -eq 2 ]; then
