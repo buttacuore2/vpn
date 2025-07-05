@@ -49,6 +49,8 @@ sudo iptables -t nat -A POSTROUTING -o $DEV -s 10.20.0.0/16 -j MASQUERADE
 sudo iptables -t nat -A POSTROUTING -o $DEV -s 10.30.0.0/16 -j MASQUERADE
 exit 0
 END
+chmod +x /etc/systemd/system/rc-local.service
+chmod +x /etc/rc.local
 sudo systemctl daemon-reload
 sudo systemctl enable rc-local.service
 
